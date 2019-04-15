@@ -7,4 +7,4 @@ Step to show how to use free tools to code and debug stm32 MCU program.
 Ubuntu + Eclipse + gcc-arm-none-eabi + openocd
 
 ## SDK
-FreeRTOS
+CMSIS for stm32 + stm32 low layer driver + FreeRTOS
