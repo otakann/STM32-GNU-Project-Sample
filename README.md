@@ -1,7 +1,7 @@
 # Project Sample of stm32 MCU program develop
 
 ## What is this
-Step to show how to use free tools to code and debug stm32 MCU program.
+Step to show how to use free tools to code , build and debug stm32 MCU program.
 
 ## Environment
 * [Ubuntu](https://www.ubuntu.com/download/desktop)
@@ -10,4 +10,11 @@ Step to show how to use free tools to code and debug stm32 MCU program.
 * [openocd](https://github.com/gnu-mcu-eclipse/openocd/releases)
 
 ## SDK
-CMSIS for stm32 + stm32 low layer driver + FreeRTOS
+* [CMSIS for stm32 + stm32 low layer driver](https://www.st.com/en/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus.html#tools-software)
+* [FreeRTOS](https://www.freertos.org/a00104.html)
+
+## Evaluation board
+* [B-L475E-IOT01A](https://www.st.com/en/evaluation-tools/b-l475e-iot01a.html)
+
+## Example
+* Blink user led
