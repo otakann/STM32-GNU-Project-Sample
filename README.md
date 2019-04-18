@@ -14,17 +14,17 @@ Step to show how to use free tools to code , build and debug stm32 MCU program.
 * [FreeRTOS](https://www.freertos.org/a00104.html)
 
 ## Evaluation board
-* [B-L475E-IOT01A](https://www.st.com/en/evaluation-tools/b-l475e-iot01a.html)
+[B-L475E-IOT01A](https://www.st.com/en/evaluation-tools/b-l475e-iot01a.html)
 
 ## Example
 Blink user led
 
 ## Manual
-* Download the gcc-arm-none-eabi toolchain from [ARM official website](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads). Unpack it to wherever you want. In this case I put it in "/usr/local/install".
+* Download the gcc-arm-none-eabi toolchain from [ARM official website](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads). Unpack it to wherever you want. In this case I put it into "/usr/local/install".
 ```sh
 tar -jxvf gcc-arm-none-eabi-8-2018-q4-major-linux.tar.bz2 -C /usr/local/install
 ```
-* Download the Open On-Chip Debugger binary packages from [GNU MCU Eclipse Project](https://github.com/gnu-mcu-eclipse/openocd/releases). Unpack it to wherever you want. In this case I put it in "/usr/local/install".
+* Download the Open On-Chip Debugger binary packages from [GNU MCU Eclipse Project](https://github.com/gnu-mcu-eclipse/openocd/releases). Unpack it to wherever you want. In this case I put it into "/usr/local/install".
 ```sh
 tar -zxvf gnu-mcu-eclipse-openocd-0.10.0-11-20190118-1134-centos64.tgz -C /usr/local/install
 ```
@@ -32,4 +32,8 @@ tar -zxvf gnu-mcu-eclipse-openocd-0.10.0-11-20190118-1134-centos64.tgz -C /usr/l
 ```sh
 cp /usr/local/install/gnu-mcu-eclipse/openocd/0.10.0-11-20190118-1134/contrib/60-openocd.rules /etc/udev/rules.d/
 udevadm control --reload
+```
+* Download open-jdk from [oracle official website](jdk.java.net). Unpack it to whenever you want. In this case I put it into "/usr/local/install".
+```sh
+tar -zxvf openjdk-12.0.1_linux-x64_bin.tar.gz -C /usr/local/install
 ```
