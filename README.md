@@ -43,5 +43,5 @@ tar -zxvf eclipse-cpp-2019-03-R-linux-gtk-x86_64.tar.gz -C /usr/local/install
 ```
 * Add the jvm executable file path parameter like follows in "eclipse.ini" file.
 ![image](https://github.com/otakann/STM32-GNU-Project-Sample/blob/master/raw/eclipse_ini.png)
-* Create a "desktop" configuration file named "eclipse.desktop" like follows in "/usr/share/applications". Then you can launch eclipse from application shortcut.
+* Create a new "desktop" configuration file named "eclipse.desktop" like follows in "/usr/share/applications". Then you can launch eclipse from application shortcut.
 ![image](https://github.com/otakann/STM32-GNU-Project-Sample/blob/master/raw/eclipse_desktop.png)
