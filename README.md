@@ -33,7 +33,13 @@ tar -zxvf gnu-mcu-eclipse-openocd-0.10.0-11-20190118-1134-centos64.tgz -C /usr/l
 cp /usr/local/install/gnu-mcu-eclipse/openocd/0.10.0-11-20190118-1134/contrib/60-openocd.rules /etc/udev/rules.d/
 udevadm control --reload
 ```
-* Download open-jdk from [oracle official website](jdk.java.net). Unpack it to whenever you want. In this case I put it into "/usr/local/install".
+* Download open-jdk from [oracle official website](jdk.java.net). Unpack it to wherever you want. In this case I put it into "/usr/local/install".
 ```sh
 tar -zxvf openjdk-12.0.1_linux-x64_bin.tar.gz -C /usr/local/install
 ```
+* Download [Eclipse IDE for C/C++ Developers](https://www.eclipse.org/downloads/packages/). Unpack it to wherever you want. In this case I put it into "/usr/local/install".
+```sh
+tar -zxvf eclipse-cpp-2019-03-R-linux-gtk-x86_64.tar.gz -C /usr/local/install
+```
+* Add the jvm executable file path parameter in "eclipse.ini" file.
+* Create a "desktop" configuration file named "eclipse.desktop" like follows in "/usr/share/applications". Then you can launch eclipse from application shortcut.
