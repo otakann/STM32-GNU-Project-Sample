@@ -71,8 +71,9 @@ tar -zxvf eclipse-cpp-2019-03-R-linux-gtk-x86_64.tar.gz -C /usr/local/install
 * Copy all of the files such as "stm32l4xx_ll_xxx.c" from "en.stm32cubel4/STM32Cube_FW_L4_V1.13.0/Drivers/STM32L4xx_HAL_Driver/Src" into "led_blink/package/ll_driver/src".
 #### Low layer
 * Copy the file "startup_stm32l475xx.s" from "en.stm32cubel4/STM32Cube_FW_L4_V1.13.0/Drivers/CMSIS/Device/ST/STM32L4xx/Source/Templates/gcc" into "led_blink/lowlayer". And so on, this file is chosen according to your MCU model.
-* Modify the linker script file "STM32L475VGTx_FLASH.ld" in "led_blink/lowlayer". I got this file from "en.stm32cubel4/STM32Cube_FW_L4_V1.13.0/Projects/B-L475E-IOT01A/Templates_LL/SW4STM32/B-L475E-IOT01". So if there is no example of your MCU in STM32Cube package, you may modify this file to fit your MCU. The main point is as follows.
-* Implement the Interrupt Handlers in "led_blink/lowlayer/stm32l4xx_it.c" and "led_blink/lowlayer/stm32l4xx_it.h". I got these two files from "en.stm32cubel4/STM32Cube_FW_L4_V1.13.0/Projects/B-L475E-IOT01A/Templates_LL/Inc" and "en.stm32cubel4/STM32Cube_FW_L4_V1.13.0/Projects/B-L475E-IOT01A/Templates_LL/Src". And I add the FreeRTOS port function in it.
+* Modify the linker script file "STM32L475VGTx_FLASH.ld" in "led_blink/lowlayer". I got this file from "en.stm32cubel4/STM32Cube_FW_L4_V1.13.0/Projects/B-L475E-IOT01A/Templates_LL/SW4STM32/B-L475E-IOT01". So if there is no example of your MCU in STM32Cube package, you may modify this file to fit your MCU. The main points are as follows.
+* Implement the Interrupt Handlers in "led_blink/lowlayer/stm32l4xx_it.c" and "led_blink/lowlayer/stm32l4xx_it.h". I got these two files from "en.stm32cubel4/STM32Cube_FW_L4_V1.13.0/Projects/B-L475E-IOT01A/Templates_LL/Inc" and "en.stm32cubel4/STM32Cube_FW_L4_V1.13.0/Projects/B-L475E-IOT01A/Templates_LL/Src". And I comment some functions has been implemented in FreeRTOS.
+![image](https://github.com/otakann/STM32-GNU-Project-Sample/blob/master/raw/stm32f4xx_it_c.png)
 * Modify the "SystemClock_Config" function in "led_blink/lowlayer/main.c" file to fit your hardware. You can reference the example "main.c" file in the sample project of STM32Cube package.
 ### FreeRTOS
 * Download FreeRTOS Source code from [FreeRTOS official website](https://www.freertos.org/a00104.html).
