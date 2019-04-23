@@ -62,7 +62,13 @@ tar -zxvf eclipse-cpp-2019-03-R-linux-gtk-x86_64.tar.gz -C /usr/local/install
 * Copy the file "cmsis_gcc.h","core_cmFunc.h","core_cmInstr.h" and "core_cmSimd.h" from "en.stm32cubel4/STM32Cube_FW_L4_V1.13.0/Drivers/CMSIS/Include" into "led_blink/cmsis/device/inc".
 * Copy the file "cmsis_os2.h" from "en.stm32cubel4/STM32Cube_FW_L4_V1.13.0/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2" into "led_blink/cmsis/rtos/inc".
 * Implement your own RTOS wrapper for CMSIS-RTOS v2 in "led_blink/cmsis/rtos/src". In this case I write a simple package for FreeRTOS. You can also copy the file "cmsis_os2.c" from "en.stm32cubel4/STM32Cube_FW_L4_V1.13.0/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2" directly. 
-### Hardware driver
+#### Hardware driver
 * ST provide three forms of driver API. Standard Peripheral Library, Cube HAL APIs and Cube low layer APIs. In this case I use the low layer APIs. 
 * Copy all of the files such as "stm32l4xx_ll_xxx.h" from "en.stm32cubel4/STM32Cube_FW_L4_V1.13.0/Drivers/STM32L4xx_HAL_Driver/Inc" into "led_blink/package/ll_driver/inc".
+* Copy the file "stm32_assert_template.h" from "en.stm32cubel4/STM32Cube_FW_L4_V1.13.0/Drivers/STM32L4xx_HAL_Driver/Inc" into "led_blink/cmsis/device/inc". Then rename it to "stm32_assert.h"
 * Copy all of the files such as "stm32l4xx_ll_xxx.c" from "en.stm32cubel4/STM32Cube_FW_L4_V1.13.0/Drivers/STM32L4xx_HAL_Driver/Src" into "led_blink/package/ll_driver/src".
+#### Low layer
+* Copy the file "startup_stm32l475xx.s" from "en.stm32cubel4/STM32Cube_FW_L4_V1.13.0/Drivers/CMSIS/Device/ST/STM32L4xx/Source/Templates/gcc" into "led_blink/lowlayer". And so on, this file is chosen according to your MCU model.
+* Modify the linker script file "STM32L475VGTx_FLASH.ld" in "led_blink/lowlayer". I got this file from "en.stm32cubel4/STM32Cube_FW_L4_V1.13.0/Projects/B-L475E-IOT01A/Templates_LL/SW4STM32/B-L475E-IOT01". So if there is no example of your MCU in STM32Cube package, you may modify this file to fit your MCU. The main point is as follows.
+* Implement the Interrupt Handlers in "led_blink/lowlayer/stm32l4xx_it.c" and "led_blink/lowlayer/stm32l4xx_it.h". I got these two files from "en.stm32cubel4/STM32Cube_FW_L4_V1.13.0/Projects/B-L475E-IOT01A/Templates_LL/Inc" and "en.stm32cubel4/STM32Cube_FW_L4_V1.13.0/Projects/B-L475E-IOT01A/Templates_LL/Src". And I add the FreeRTOS port function in it.
+* Modify the "SystemClock_Config" function in "led_blink/lowlayer/main.c" file to fit your hardware. You can reference the example "main.c" file in the sample project of STM32Cube package. 
