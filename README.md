@@ -79,4 +79,7 @@ tar -zxvf eclipse-cpp-2019-03-R-linux-gtk-x86_64.tar.gz -C /usr/local/install
 * Individually copy the file "portmacro.h" and "port.c" from "FreeRTOSv10.2.0/FreeRTOS/Source/portable/GCC/ARM_CM4F" into "led_blink/package/freertos/inc" and "led_blink/package/freertos/src". Please make sure your MCU model. STM32L4 series is cotex-M4 processor with FPU. So I choose the "ARM_CM4F" folder.
 * Modify the file "FreeRTOSConfig.h" in "led_blink/package/freertos/inc" to fit your own project. You can reference the meaning of each parameter from [here](https://www.freertos.org/a00110.html).
 * Choose a heap implementation file from "FreeRTOSv10.2.0/FreeRTOS/Source/portable/MemMang". The diffrence of each implementation you can reference is [here](https://www.freertos.org/a00111.html).
-
+### Project
+* Launch Eclipse and click "File->new->Makefile Project with Existing Code" tab. Then choose the source code folder and "Cross GCC" as toolchain. Click "finish" button.
+* Right click the project and click the "Properties" tab. Then click "C/C++ Build->Tool Chain Editor". Select the "Current toolchain" as "no toolchain" then click "Apply and Close". Repeat this step but select the "Current toolchain" as "Cross GCC". (Perhaps CDT issue?)
+* Then click the project "Properties->C/C++ Build->Settings". Input the toolchain location and prefix.
