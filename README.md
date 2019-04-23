@@ -82,4 +82,5 @@ tar -zxvf eclipse-cpp-2019-03-R-linux-gtk-x86_64.tar.gz -C /usr/local/install
 ### Project
 * Launch Eclipse and click "File->new->Makefile Project with Existing Code" tab. Then choose the source code folder and "Cross GCC" as toolchain. Click "finish" button.
 * Right click the project and click the "Properties" tab. Then click "C/C++ Build->Tool Chain Editor". Select the "Current toolchain" as "no toolchain" then click "Apply and Close". Repeat this step but select the "Current toolchain" as "Cross GCC". (Perhaps CDT issue?)
-* Then click the project "Properties->C/C++ Build->Settings". Input the toolchain location and prefix.
+* Click the project "Properties->C/C++ Build->Settings". Input the toolchain path and prefix.
+* Click the project "Properties->C/C++ Build". In the "Builder Settings" tab, set "Build Command" as follows and set "Build directory" as the top of the source code folder. In my case the top of the source code folder is "led_blink".
