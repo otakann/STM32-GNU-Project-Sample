@@ -21,6 +21,11 @@ Blink user led
 
 ## Manual
 
+### Make
+* If you cannot execute the "make" command, please install the make tools.
+```sh
+apt install make
+```
 ### Toolchain
 * Download the gcc-arm-none-eabi toolchain from [ARM official website](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads). Unpack it to wherever you want. In this case I put it into "/usr/local/install".
 ```sh
@@ -51,6 +56,7 @@ tar -zxvf eclipse-cpp-2019-03-R-linux-gtk-x86_64.tar.gz -C /usr/local/install
 ![image](https://github.com/otakann/STM32-GNU-Project-Sample/blob/master/raw/eclipse_desktop.png)
 * Launch the eclipse IDE and click the "Help->Eclipse Marketplace" tab. Then search the "GNU MCU Eclipse" plug-in and install it.
 ![image](https://github.com/otakann/STM32-GNU-Project-Sample/blob/master/raw/GNU_MCU_eclipse.png) 
+* Click the "Window->Preferences" tab. Input the information in "MCU->Global OpenOCD Path" and click "Apply and Close".
 ### STM32Cube
 * Download STM32Cube MCU Package from [ST official website](https://www.st.com/en/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus.html#tools-software). Please select the package according to your MCU model. The MCU of my board(B-L475E-IOT01A) is STM32L475VGT6. So I choose the file "en.stm32cubel4.zip".
 #### CMSIS
