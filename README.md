@@ -56,7 +56,7 @@ tar -zxvf eclipse-cpp-2019-03-R-linux-gtk-x86_64.tar.gz -C /usr/local/install
 ![image](https://github.com/otakann/STM32-GNU-Project-Sample/blob/master/raw/eclipse_desktop.png)
 * Launch the eclipse IDE and click the "Help->Eclipse Marketplace" tab. Then search the "GNU MCU Eclipse" plug-in and install it.
 ![image](https://github.com/otakann/STM32-GNU-Project-Sample/blob/master/raw/GNU_MCU_eclipse.png) 
-* Click the "Window->Preferences" tab. Input the information in "MCU->Global OpenOCD Path" and click "Apply and Close".
+* Click the "Window->Preferences" tab. Input the information in "MCU->Global OpenOCD Path" and then click the "Apply and Close" button.
 ![image](https://github.com/otakann/STM32-GNU-Project-Sample/blob/master/raw/openocd.png)
 ### STM32Cube
 * Download STM32Cube MCU Package from [ST official website](https://www.st.com/en/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus.html#tools-software). Please select the package according to your MCU model. The MCU of my board(B-L475E-IOT01A) is STM32L475VGT6. So I choose the file "en.stm32cubel4.zip".
@@ -94,7 +94,19 @@ tar -zxvf eclipse-cpp-2019-03-R-linux-gtk-x86_64.tar.gz -C /usr/local/install
 * Launch Eclipse and click "File->new->Makefile Project with Existing Code" tab. Then choose the source code folder and "Cross GCC" as toolchain. Click "finish" button.
 ![image](https://github.com/otakann/STM32-GNU-Project-Sample/blob/master/raw/Project.png)
 * Right click the project and click the "Properties" tab. Then click "C/C++ Build->Tool Chain Editor". Select the "Current toolchain" as "no toolchain" then click "Apply and Close". Repeat this step but select the "Current toolchain" as "Cross GCC". (Perhaps CDT issue?)
-* Click the project "Properties->C/C++ Build->Settings". Input the toolchain path and prefix.
+* Click the project "Properties->C/C++ Build->Settings" tab. Input the toolchain path and prefix.
 ![image](https://github.com/otakann/STM32-GNU-Project-Sample/blob/master/raw/toolchain.png)
-* Click the project "Properties->C/C++ Build". In the "Builder Settings" tab, set "Build Command" as follows and set "Build directory" as the top of the source code folder. In my case the top of the source code folder is "led_blink".
+* Click the project "Properties->C/C++ Build" tab. In the "Builder Settings" tab, set "Build Command" as follows and set "Build directory" as the top of the source code folder. In my case the top of the source code folder is "led_blink".
 ![image](https://github.com/otakann/STM32-GNU-Project-Sample/blob/master/raw/Build_command.png)
+* Edit the configuration of Makefile in "led_blink" folder if you need. 
+![image](https://github.com/otakann/STM32-GNU-Project-Sample/blob/master/raw/makefile.png)
+* Try to build the project (Project->Build Project).
+![image](https://github.com/otakann/STM32-GNU-Project-Sample/blob/master/raw/make_log.png)
+### Debug
+* Click the "Run->Debug Configurations..." tab. Then right click the "GDB OpenOCD Debugging" tab and choose the "New Configuration".
+![image](https://github.com/otakann/STM32-GNU-Project-Sample/blob/master/raw/debug_config_1.png)
+* In "Main" tab, click the "Search Project..." button to select debug file.
+![image](https://github.com/otakann/STM32-GNU-Project-Sample/blob/master/raw/debug_config_2.png)
+* In "Debugger" tab, input the following information and click "Apply" button. In my case, B-L475E-IOT01A already has a st-link on-board debugger. If you have a different debugger or MCU, you need change the "Config Options". You can find all of the congifuration script in your install location of openOCD.
+![image](https://github.com/otakann/STM32-GNU-Project-Sample/blob/master/raw/debug_config_3.png)
+* Connect the hardware and click "Debug" button then you can start to debug on-chip. 
