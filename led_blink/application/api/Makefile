@@ -6,12 +6,12 @@
 TOP_DIR			=	$(PWD)/
 TOOLPATH_DIR	?= 	$(TOP_DIR)../../../../arm-none-eabi-toolchain/gcc-arm-none-eabi-5_4-2016q3/bin/
 OUTPUT_DIR		?= 	$(TOP_DIR)../../output/
-CORE_RTOS_DIR	?= 	$(TOP_DIR)../../package/freertos/
 CMSIS_RTOS_DIR	?=	$(TOP_DIR)../../cmsis/rtos/
-APP_DIR			?=	$(TOP_DIR)../
-WRAP_DIR		?=	$(APP_DIR)wrapper/
-MSM_DIR			?=	$(APP_DIR)msm/
-API_DIR			?=	$(APP_DIR)api/
+CORE_RTOS_DIR	?= 	$(TOP_DIR)../../package/freertos/
+
+API_DIR			?=	$(TOP_DIR)
+WRAP_DIR		?=	$(TOP_DIR)../wrapper/
+MSM_DIR			?=	$(TOP_DIR)../msm/
 
 CROSS_COMPILE	?=	$(TOOLPATH_DIR)arm-none-eabi-
 CC				=	$(CROSS_COMPILE)gcc
@@ -21,9 +21,12 @@ FLOAT_TYPE		?=	-mfloat-abi=soft
 
 VERSION			?=	RELEASE
 
+GLOBAL_DEFINE	?=
+
 INCLUDES		=	-I$(CORE_RTOS_DIR)inc \
 					-I$(CMSIS_RTOS_DIR)inc \
 					-I$(WRAP_DIR)inc \
+					-I$(CMD_DIR)interface \
 					-I$(MSM_DIR)inc
 
 OBJS			=	application_api.o
@@ -54,6 +57,8 @@ CFLAGS			=	-mcpu=cortex-m4 \
 					-std=c99 \
 					$(DEBUG_CFLAGS) $(INCLUDES)
 
+DFLAGS			=	$(GLOBAL_DEFINE)
+
 #
 # Compile Menu
 #
@@ -66,7 +71,7 @@ $(TARGET)	: $(OBJS)
 	$(AR) -crv $(TARGET) $(OBJS)
 
 ${OBJS} 	: ${SOURCES}
-	$(CC) $(CFLAGS) -c $(SOURCES)
+	$(CC) $(CFLAGS) $(DFLAGS) -c $(SOURCES)
     
 clean		:
 	rm -f *.o *.gcno *.gcda *.gcov *.Z* *~ $(TARGET)
