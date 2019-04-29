@@ -69,8 +69,7 @@ CFLAGS			=	-mcpu=cortex-m4 \
 					-std=c99 \
 					$(DEBUG_CFLAGS) $(INCLUDES)
 
-LDFLAGS			=	$(LIBS) \
-					$(LIB_DIR)
+DFLAGS			=	$(GLOBAL_DEFINE)
 
 #
 # Compile Menu
@@ -84,7 +83,7 @@ $(TARGET)	: $(OBJS)
 	$(AR) -crv $(TARGET) $(OBJS)
 
 ${OBJS} 	: ${SOURCES}
-	$(CC) $(CFLAGS) -c $(SOURCES)
+	$(CC) $(CFLAGS) $(DFLAGS) -c $(SOURCES)
     
 clean		:
 	rm -f *.o *.gcno *.gcda *.gcov *.Z* *~ $(TARGET)
