@@ -16,6 +16,8 @@ FLOAT_TYPE		?=	-mfloat-abi=softfp -mfpu=fpv4-sp-d16
 
 VERSION			?=	RELEASE
 
+GLOBAL_DEFINE	?=
+
 INCLUDES		=	-I$(RTOS_DIR)inc
 
 OBJS			=	croutine.o \
@@ -58,7 +60,9 @@ CFLAGS			=	-mcpu=cortex-m4 \
 					-Wall \
 					-Wextra \
 					-std=c99 \
-					$(DEBUG_CFLAGS) $(INCLUDES) 
+					$(DEBUG_CFLAGS) $(INCLUDES)
+
+DFLAGS			=	$(GLOBAL_DEFINE)
 
 #
 # Compile Menu
@@ -72,7 +76,7 @@ $(TARGET)	: $(OBJS)
 	$(AR) -crv $(TARGET) $(OBJS)
 
 ${OBJS} 	: ${SOURCES}
-	$(CC) $(CFLAGS) -c $(SOURCES)
+	$(CC) $(CFLAGS) $(DFLAGS) -c $(SOURCES)
     
 clean		:
 	rm -f *.o *.gcno *.gcda *.gcov *.Z* *~ $(TARGET)
