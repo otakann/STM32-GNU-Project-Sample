@@ -17,6 +17,8 @@ FLOAT_TYPE		?=	-mfloat-abi=soft
 
 VERSION			?=	RELEASE
 
+GLOBAL_DEFINE	?=	-DUSE_FULL_LL_DRIVER
+
 INCLUDES		=	-I$(LLDRIVER_DIR)inc \
 					-I$(CMSIS_DEV_DIR)inc
 
@@ -91,7 +93,7 @@ CFLAGS			=	-mcpu=cortex-m4 \
 					-std=c99 \
 					$(DEBUG_CFLAGS) $(INCLUDES)
 
-DFLAGS			=	-DUSE_FULL_LL_DRIVER
+DFLAGS			=	$(GLOBAL_DEFINE)
 
 #
 # Compile Menu
