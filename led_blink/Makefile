@@ -6,7 +6,7 @@
 export TARGET			=	led_blink
 
 TOP_DIR					=	$(PWD)/
-TOOLPATH_DIR			=	$(TOP_DIR)../../arm-none-eabi-toolchain/gcc-arm-none-eabi-5_4-2016q3/bin/
+TOOLPATH_DIR			=	/usr/local/install/gcc-arm-none-eabi-8-2018-q4-major/bin/
 PACKAGE_DIR				=	$(TOP_DIR)package/
 CMSIS_DIR				=	$(TOP_DIR)cmsis/
 
