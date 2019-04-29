@@ -1,6 +1,6 @@
 #
 #	Makefile of STM32 with FreeRTOS platform Sample project
-#	Hello world
+#	Led blink
 #
 
 CC						=	$(CROSS_COMPILE)gcc
@@ -63,13 +63,17 @@ CFLAGS					=	-mcpu=cortex-m4 \
 							-Wall \
 							-Wextra \
 							-std=c99 \
-							$(DEBUG_CFLAGS) $(INCLUDES) 
+							$(DEBUG_CFLAGS) $(INCLUDES)
+
+DFLAGS					=	$(GLOBAL_DEFINE)
 
 LDFLAGS					=	-mcpu=cortex-m4 \
 							-mthumb \
 							-T STM32L475VGTx_FLASH.ld \
 							-Xlinker --gc-sections \
+							-Xlinker "-(" \
 							$(LIBS) \
+							-Xlinker "-)" \
 							$(LIB_DIR) \
 							-Wl,-Map,$(TARGET_MAP) \
 							--specs=nano.specs
@@ -95,10 +99,10 @@ $(TARGET_ELF)	: $(OBJS)
 	$(CC) -o $(TARGET_ELF) $(OBJS) $(LDFLAGS)
 
 ${AOBJS} 		: ${ASOURCES}
-	$(AS) $(CFLAGS) -c $(ASOURCES)
+	$(AS) $(CFLAGS) $(DFLAGS) -c $(ASOURCES)
 
 ${COBJS} 		: ${CSOURCES}
-	$(CC) $(CFLAGS) -c $(CSOURCES)
+	$(CC) $(CFLAGS) $(DFLAGS) -c $(CSOURCES)
 
 install			:
 	if [ ! -d $(OUTPUT_DIR) ]; then mkdir -p $(OUTPUT_DIR); fi;
