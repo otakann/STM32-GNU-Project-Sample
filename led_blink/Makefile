@@ -1,6 +1,6 @@
 #
 #	Makefile of Embedded system develop project
-#	Hello world
+#	Led blink
 #
 
 export TARGET			=	led_blink
@@ -20,6 +20,7 @@ export APP_DIR			=	$(TOP_DIR)application/
 export WRAP_RTOS_DIR	?=	$(CMSIS_RTOS_DIR)src/wrapper_FreeRTOS/
 
 export VERSION			?=	RELEASE
+export GLOBAL_DEFINE	=	-DUSE_FULL_LL_DRIVER
 export FLOAT_TYPE		?=	-mfloat-abi=softfp -mfpu=fpv4-sp-d16
 
 export CROSS_COMPILE	=	$(TOOLPATH_DIR)arm-none-eabi-
