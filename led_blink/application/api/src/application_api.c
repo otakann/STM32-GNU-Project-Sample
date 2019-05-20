@@ -33,6 +33,7 @@
 **************************************************************/
 
 #include "cmsis_os2.h"
+
 #include "wrapper_api.h"
 #include "msm_api.h"
 
@@ -73,6 +74,11 @@ static const osThreadAttr_t msm_attr =
  */
 extern int Application_run (void)
 {
+
+    if(WRAPPER_INIT())
+    {
+        return (-1);
+    }
     /* Initialize RTOS kernel */
     if(osOK != osKernelInitialize())
     {

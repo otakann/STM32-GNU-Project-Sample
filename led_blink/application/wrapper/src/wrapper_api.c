@@ -19,73 +19,44 @@
 **  STM32 MCU program develop platform
 **************************************************************/
 /** 
- * @file        wrapper_api.h
+ * @file        wrapper_api.c
  * @brief       common wrapper API
  * @author      zhaozhenge@outlook.com
  *
  * @version     00.00.01 
- *              - 2019/04/08 : zhaozhenge@outlook.com 
+ *              - 2019/04/28 : zhaozhenge@outlook.com
  *                  -# New
  */
-
-#ifndef _WRAP_API_H_
-#define _WRAP_API_H_
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 /**************************************************************
 **  Include
 **************************************************************/
 
-#include "FreeRTOS.h"
+#include "cmsis_os2.h"
+
+#include "wrapper_api.h"
 
 /**************************************************************
-**  Symbol
+**  Global param
 **************************************************************/
 
-#define THREAD_CB       StaticTask_t        /*!< Thread contrl block */
-#define EVENT_CB        StaticEventGroup_t  /*!< Event flag contrl block */
-#define MQ_CB           StaticQueue_t       /*!< Message queue contrl block */
-#define SEM_CB          StaticSemaphore_t   /*!< Semaphore contrl block */
-
-#define SAFE_IT_PRIO    configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY
-
-#define HEAP_MEM_START  (0x10000000)        /*!< Start memory address of heap */
-#define HEAP_MEM_SIZE   (32 * 1024)         /*!< Total memory size of heap */
+uint16_t                g_KernelIsIRQ;
 
 /**************************************************************
 **  Interface
 **************************************************************/
 
-/**
+/** 
  * @brief               Initial system wrapper
  * @retval              0               success
  * @retval              -1              fail
  * @author              zhaozhenge@outlook.com
  * @date                2019/04/28
  */
-extern int WRAPPER_INIT(void);
-
-/**
- * @brief               Thread safe memory allocate function
- * @param[in]           WantedSize      Memory size that want to allocate
- * @return              Memory address allocated successfully
- * @note                NULL maybe returned when no memory enough
- * @author              zhaozhenge@outlook.com
- * @date                2019/04/28
- */
-extern void* SAFE_MALLOC(size_t WantedSize);
-
-/**
- * @brief               Thread safe memory free function
- * @param[in]           Pv              Memory address that allocated from the heap handle
- * @return              None
- * @author              zhaozhenge@outlook.com
- * @date                2019/04/28
- */
-extern void SAFE_FREE(void* Pv);
+extern int WRAPPER_INIT(void)
+{
+    g_KernelIsIRQ   =   0;
+}
 
 /**
  * @brief               Enter interrupt
@@ -93,7 +64,10 @@ extern void SAFE_FREE(void* Pv);
  * @author              zhaozhenge@outlook.com
  * @date                2019/05/16
  */
-extern void EXIT_ENTRY(void);
+extern void EXIT_ENTRY(void)
+{
+    g_KernelIsIRQ++;
+}
 
 /**
  * @brief               Leave interrupt
@@ -101,10 +75,7 @@ extern void EXIT_ENTRY(void);
  * @author              zhaozhenge@outlook.com
  * @date                2019/05/16
  */
-extern void EXIT_LEAVE(void);
-
-#ifdef __cplusplus
+extern void EXIT_LEAVE(void)
+{
+    g_KernelIsIRQ--;
 }
-#endif
-
-#endif /* _WRAP_API_H_ */

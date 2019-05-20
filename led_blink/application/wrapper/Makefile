@@ -1,17 +1,16 @@
 #
-#	Makefile of machine status module
-#	libappmsm.a
+#	Makefile of application wrapper
+#	libwrap.a
 #
 
 TOP_DIR			=	$(PWD)/
 TOOLPATH_DIR	?= 	$(TOP_DIR)../../../../arm-none-eabi-toolchain/gcc-arm-none-eabi-5_4-2016q3/bin/
 OUTPUT_DIR		?= 	$(TOP_DIR)../../output/
-CORE_RTOS_DIR	?= 	$(TOP_DIR)../../package/freertos/
-CMSIS_RTOS_DIR	?=	$(TOP_DIR)../../cmsis/rtos/
-CMSIS_DEV_DIR	?=	$(TOP_DIR)../../cmsis/device/
-LLDRIVER_DIR	?=	$(TOP_DIR)../../package/ll_driver/
-APP_DIR			?=	$(TOP_DIR)../
-MSM_DIR			?=	$(APP_DIR)msm/
+CMSIS_RTOS_DIR	=	$(TOP_DIR)../../cmsis/rtos/
+CORE_RTOS_DIR	= 	$(TOP_DIR)../../package/freertos/
+CLIB_DIR		=	$(TOP_DIR)../../package/clib/
+
+WRAP_DIR		?=	$(TOP_DIR)
 
 CROSS_COMPILE	?=	$(TOOLPATH_DIR)arm-none-eabi-
 CC				=	$(CROSS_COMPILE)gcc
@@ -21,15 +20,20 @@ FLOAT_TYPE		?=	-mfloat-abi=soft
 
 VERSION			?=	RELEASE
 
-INCLUDES		=	-I$(CMSIS_RTOS_DIR)inc \
-					-I$(LLDRIVER_DIR)inc \
-					-I$(CMSIS_DEV_DIR)inc
+GLOBAL_DEFINE	?=
 
-OBJS			=	msm_api.o
+GLOBAL_INCLUDES	?=	-I$(CORE_RTOS_DIR)inc \
+					-I$(CMSIS_RTOS_DIR)inc \
+					-I$(CLIB_DIR)inc \
+					-I$(WRAP_DIR)inc
+					
+INCLUDES		=	$(GLOBAL_INCLUDES)
 
-SOURCES			=	$(MSM)src/msm_api.c
+OBJS			=	wrapper_api.o
 
-TARGET			=	libappmsm.a
+SOURCES			=	$(WRAP_DIR)src/wrapper_api.c
+
+TARGET			=	libwrap.a
 
 ifeq ($(VERSION), DEBUG)
 DEBUG_CFLAGS	=	-g3 -O0
@@ -53,7 +57,7 @@ CFLAGS			=	-mcpu=cortex-m4 \
 					-std=c99 \
 					$(DEBUG_CFLAGS) $(INCLUDES)
 
-DFLAGS			=	-DUSE_FULL_LL_DRIVER
+DFLAGS			=	$(GLOBAL_DEFINE)
 
 #
 # Compile Menu
