@@ -85,6 +85,9 @@ static void SystemClock_Config(void)
     LL_Init1msTick(80000000);
     /* Update CMSIS variable (which can be updated also through SystemCoreClockUpdate function) */
     LL_SetSystemCoreClock(80000000);
+    /* Set NVIC Group (must be group 4[0x03] for FreeRTOS) */
+    NVIC_SetPriorityGrouping((uint32_t)0x00000003);
+
     return;
 }
 
