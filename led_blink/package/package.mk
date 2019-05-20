@@ -3,21 +3,21 @@
 #	Package
 #
 
-.PHONY			: package cleanpackage corertos cleancorertos lldriver cleanlldriver
+.PHONY				: package cleanpackage corertos cleancorertos lldriver cleanlldriver ntshell cleanntshell clib cleanclib vl53l0_driver cleanvl53l0_driver
 
-lldriver		:
+lldriver			:
 	make -C $(LLDRIVER_DIR) all && make -C $(LLDRIVER_DIR) install
 
-cleanlldriver	:
+cleanlldriver		:
 	make -C $(LLDRIVER_DIR) clean
 
-corertos		:
+corertos			:
 	make -C $(CORE_RTOS_DIR) all && make -C $(CORE_RTOS_DIR) install
 
-cleancorertos	:
+cleancorertos		:
 	make -C $(CORE_RTOS_DIR) clean
 
-package			: lldriver corertos
+package				: lldriver corertos
     
-cleanpackage	: cleanlldriver cleancorertos 
+cleanpackage		: cleanlldriver cleancorertos
 
