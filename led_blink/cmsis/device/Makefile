@@ -1,6 +1,6 @@
 #
 #	Makefile of STM32 with FreeRTOS platform Sample project
-#	Led blink
+#	Hello world
 #
 
 CC						=	$(CROSS_COMPILE)gcc

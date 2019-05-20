@@ -62,7 +62,7 @@
 **  Global Param
 **************************************************************/
 
-osKernelState_t             g_KernelState   =   osKernelInactive;
+static osKernelState_t      g_KernelState   =   osKernelInactive;
 static const char*          g_KernalId      =   "FreeRTOSv10.2.0";
 #if ( configSUPPORT_DYNAMIC_ALLOCATION == 1 )
 static const HeapRegion_t   g_HeapRegions[] =   {
@@ -73,6 +73,8 @@ static const HeapRegion_t   g_HeapRegions[] =   {
 #if ( configSUPPORT_STATIC_ALLOCATION == 1 )
 static StaticTask_t         g_IdleTaskTCBBuffer;
 static StackType_t          g_IdleTaskStackBuffer[configMINIMAL_STACK_SIZE];
+static StaticTask_t         g_TimerTaskTCBBuffer;
+static StackType_t          g_TimerTaskStackBuffer[configTIMER_TASK_STACK_DEPTH];
 #endif
 
 /**************************************************************
@@ -98,6 +100,26 @@ extern void vApplicationGetIdleTaskMemory   (
     *ppxIdleTaskStackBuffer =   (StackType_t*)g_IdleTaskStackBuffer;
     *pulIdleTaskStackSize   =   configMINIMAL_STACK_SIZE;
 }
+
+/**
+ * @brief               Get memory for timer task.
+ * @param[out]          ppxTimerTaskTCBBuffer   pointer to buffer for for control block.
+ * @param[out]          ppxTimerTaskStackBuffer pointer to buffer for for stack.
+ * @param[out]          pulTimerTaskStackSize   size of stack.
+ * @return              None
+ * @author              zhaozhenge@outlook.com
+ * @date                2019/05/14
+ */
+extern void vApplicationGetTimerTaskMemory  (
+    StaticTask_t**  ppxTimerTaskTCBBuffer,
+    StackType_t**   ppxTimerTaskStackBuffer,
+    uint32_t*       pulTimerTaskStackSize   )
+{
+    *ppxTimerTaskTCBBuffer  =   &g_TimerTaskTCBBuffer;
+    *ppxTimerTaskStackBuffer=   (StackType_t*)g_TimerTaskStackBuffer;
+    *pulTimerTaskStackSize  =   configTIMER_TASK_STACK_DEPTH;
+}
+
 #endif
 
 /** 

@@ -39,47 +39,10 @@
 **  Symbol
 **************************************************************/
 
-#ifndef __ARM_ARCH_6M__
-#define __ARM_ARCH_6M__         0
-#endif
-#ifndef __ARM_ARCH_7M__
-#define __ARM_ARCH_7M__         0
-#endif
-#ifndef __ARM_ARCH_7EM__
-#define __ARM_ARCH_7EM__        0
-#endif
-#ifndef __ARM_ARCH_8M_MAIN__
-#define __ARM_ARCH_8M_MAIN__    0
-#endif
-#ifndef __ARM_ARCH_7A__
-#define __ARM_ARCH_7A__         0
-#endif
-
-#if     (   (__ARM_ARCH_7M__        ==  1U) || \
-            (__ARM_ARCH_7EM__       ==  1U) || \
-            (__ARM_ARCH_8M_MAIN__   ==  1U) )
-#define IS_IRQ_MASKED()     ((0U != __get_PRIMASK()) || ((osKernelRunning == g_KernelState) && (0U != __get_BASEPRI())))
-#elif   (   __ARM_ARCH_6M__         ==  1U  )
-#define IS_IRQ_MASKED()     ((0U != __get_PRIMASK()) && (osKernelRunning == g_KernelState))
-#elif   (   __ARM_ARCH_7A__         ==  1U  )
-#define IS_IRQ_MASKED()     (0U)
-#else
-#define IS_IRQ_MASKED()     (0U != __get_PRIMASK())
-#endif
-
-#if     (   __ARM_ARCH_7A__         ==  1U  )
-/* CPSR mode bitmasks */
-#define CPSR_MODE_USER      (0x10U)
-#define CPSR_MODE_SYSTEM    (0x1FU)
-#define IS_IRQ_MODE()       ((CPSR_MODE_USER != __get_mode()) && (CPSR_MODE_SYSTEM != __get_mode()))
-#else
-#define IS_IRQ_MODE()       (0U != __get_IPSR())
-#endif
-
-#define IS_IRQ()            (IS_IRQ_MODE() || IS_IRQ_MASKED())
+#define IS_IRQ()    (g_KernelIsIRQ)
 
 /**************************************************************
 **  Global Param
 **************************************************************/
 
-extern osKernelState_t      g_KernelState;
+extern uint16_t g_KernelIsIRQ;

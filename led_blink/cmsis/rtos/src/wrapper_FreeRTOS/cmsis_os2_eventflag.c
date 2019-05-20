@@ -116,7 +116,9 @@ extern uint32_t osEventFlagsSet (
     uint32_t            flags   )
 {
     uint32_t    ret     =   0;
+#if( INCLUDE_xTimerPendFunctionCall == 1 )
     BaseType_t  yield   =   pdFALSE;
+#endif
 
     do
     {
@@ -127,6 +129,7 @@ extern uint32_t osEventFlagsSet (
         }
         if(IS_IRQ())
         {
+#if( INCLUDE_xTimerPendFunctionCall == 1 )
             if(pdPASS != xEventGroupSetBitsFromISR( (EventGroupHandle_t)ef_id, (EventBits_t)flags, &yield ))
             {
                 ret = (uint32_t)osFlagsErrorResource;
@@ -134,6 +137,9 @@ extern uint32_t osEventFlagsSet (
             }
             portYIELD_FROM_ISR(yield);
             ret =   flags;
+#else
+            ret = (uint32_t)osFlagsErrorISR;
+#endif
         }
         else
         {
@@ -235,7 +241,7 @@ extern uint32_t osEventFlagsWait(
     uint32_t    ret             =   0;
     BaseType_t  waitAll         =   pdFALSE;
     BaseType_t  exitClr         =   pdTRUE;
-    TickType_t  xTicksToWait    =   (osWaitForever == timeout)?timeout:portMAX_DELAY;
+    TickType_t  xTicksToWait    =   (osWaitForever == timeout)?portMAX_DELAY:timeout;
 
     do
     {
