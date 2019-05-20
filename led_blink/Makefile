@@ -1,5 +1,5 @@
 #
-#	Makefile of Embedded system develop project
+#	Makefile of Embedded system develop project Sample
 #	Led blink
 #
 
@@ -12,11 +12,11 @@ CMSIS_DIR				=	$(TOP_DIR)cmsis/
 
 export OUTPUT_DIR		=	$(TOP_DIR)output/
 export LLDRIVER_DIR		=	$(PACKAGE_DIR)ll_driver/
-export CORE_RTOS_DIR	= 	$(PACKAGE_DIR)freertos/
+export CORE_RTOS_DIR	?= 	$(PACKAGE_DIR)freertos/
 export CMSIS_RTOS_DIR	= 	$(CMSIS_DIR)rtos/
 export CMSIS_DEV_DIR	=	$(CMSIS_DIR)device/
 export LOW_LAYER_DIR	=	$(TOP_DIR)lowlayer/
-export APP_DIR			=	$(TOP_DIR)application/
+export APP_DIR			?=	$(TOP_DIR)application/
 export WRAP_RTOS_DIR	?=	$(CMSIS_RTOS_DIR)src/wrapper_FreeRTOS/
 
 export VERSION			?=	RELEASE
