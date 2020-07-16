@@ -42,7 +42,7 @@ cp /usr/local/install/gnu-mcu-eclipse/openocd/0.10.0-11-20190118-1134/contrib/60
 udevadm control --reload
 ```
 ### IDE
-* Download open-jdk from [oracle official website](jdk.java.net). Unpack it to wherever you want. In this case I put it into "/usr/local/install".
+* Download open-jdk from [oracle official website](http://jdk.java.net). Unpack it to wherever you want. In this case I put it into "/usr/local/install".
 ```sh
 tar -zxvf openjdk-12.0.1_linux-x64_bin.tar.gz -C /usr/local/install
 ```
